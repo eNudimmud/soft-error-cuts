@@ -1,1 +1,447 @@
-PLACEHOLDER_LOAD_FROM_FILE
+{
+  "version": "2.0",
+  "purpose": "Prevent cross-shot visual drift by versioning ComfyUI settings at continuity-chain level.",
+  "chains": [
+    {
+      "chain_id": "C00_BOOT_CRT",
+      "first_shot": "SE_001",
+      "last_shot": "SE_004",
+      "workflow_profiles": [
+        "WF_PROCEDURAL_DIEGETIC_COMP",
+        "WF_WAN22_I2V_14B_ROBOT_LOCKED"
+      ],
+      "environment_refs": [
+        "SE_REF_ENV_RACK_AISLE_01",
+        "SE_REF_ENV_HANGAR_RIG_01"
+      ],
+      "identity_refs": [
+        "SE_REF_ENKI_ROBOT_FRONT_01"
+      ],
+      "generation_canvas": {
+        "width": 1280,
+        "height": 720
+      },
+      "immutable_within_chain": [
+        "diffusion model filenames and SHA-256 hashes",
+        "VAE and text-encoder hashes",
+        "sampler, scheduler, steps and CFG",
+        "generation dimensions and aspect ratio",
+        "color-management and upscale chain",
+        "identity conditioning weights"
+      ],
+      "keyframe_rule": "Every shot starts from an approved shot-specific keyframe. Reuse an accepted last frame only for a continuing angle/action.",
+      "change_rule": "Any immutable change creates a new chain version and invalidates unreviewed downstream shots.",
+      "runtime_fields_to_fill": {
+        "workflow_sha256_by_profile": {
+          "WF_PROCEDURAL_DIEGETIC_COMP": null,
+          "WF_WAN22_I2V_14B_ROBOT_LOCKED": null
+        },
+        "preflight_report_sha256": null,
+        "comfy_version": null,
+        "node_versions": null,
+        "model_identifiers_verified": false
+      }
+    },
+    {
+      "chain_id": "C01_SENSOR_MODEL_A",
+      "first_shot": "SE_005",
+      "last_shot": "SE_011",
+      "workflow_profiles": [
+        "WF_WAN22_I2V_14B_SENSOR_LOCKED",
+        "WF_WAN22_I2V_14B_MACRO_LOCKED"
+      ],
+      "environment_refs": [
+        "SE_REF_ENV_SENSOR_BAY_01",
+        "SE_REF_ENV_RACK_AISLE_01",
+        "SE_REF_ENV_MATERIAL_LAB_01"
+      ],
+      "identity_refs": [
+        "SE_REF_ENKI_ORGANIC_SENSOR_01"
+      ],
+      "generation_canvas": {
+        "width": 1280,
+        "height": 720
+      },
+      "immutable_within_chain": [
+        "diffusion model filenames and SHA-256 hashes",
+        "VAE and text-encoder hashes",
+        "sampler, scheduler, steps and CFG",
+        "generation dimensions and aspect ratio",
+        "color-management and upscale chain",
+        "identity conditioning weights"
+      ],
+      "keyframe_rule": "Every shot starts from an approved shot-specific keyframe. Reuse an accepted last frame only for a continuing angle/action.",
+      "change_rule": "Any immutable change creates a new chain version and invalidates unreviewed downstream shots.",
+      "runtime_fields_to_fill": {
+        "workflow_sha256_by_profile": {
+          "WF_WAN22_I2V_14B_SENSOR_LOCKED": null,
+          "WF_WAN22_I2V_14B_MACRO_LOCKED": null
+        },
+        "preflight_report_sha256": null,
+        "comfy_version": null,
+        "node_versions": null,
+        "model_identifiers_verified": false
+      }
+    },
+    {
+      "chain_id": "C02_COMPONENTS_A",
+      "first_shot": "SE_012",
+      "last_shot": "SE_015",
+      "workflow_profiles": [
+        "WF_WAN22_I2V_14B_MACRO_LOCKED",
+        "WF_PROCEDURAL_DIEGETIC_COMP"
+      ],
+      "environment_refs": [
+        "SE_REF_ENV_HANGAR_RIG_01",
+        "SE_REF_ENV_MATERIAL_LAB_01",
+        "SE_REF_ENV_RACK_AISLE_01"
+      ],
+      "identity_refs": [
+        "SE_REF_ENKI_ROBOT_FRONT_01",
+        "SE_REF_ENKI_HEAD_EARS_01"
+      ],
+      "generation_canvas": {
+        "width": 1280,
+        "height": 720
+      },
+      "immutable_within_chain": [
+        "diffusion model filenames and SHA-256 hashes",
+        "VAE and text-encoder hashes",
+        "sampler, scheduler, steps and CFG",
+        "generation dimensions and aspect ratio",
+        "color-management and upscale chain",
+        "identity conditioning weights"
+      ],
+      "keyframe_rule": "Every shot starts from an approved shot-specific keyframe. Reuse an accepted last frame only for a continuing angle/action.",
+      "change_rule": "Any immutable change creates a new chain version and invalidates unreviewed downstream shots.",
+      "runtime_fields_to_fill": {
+        "workflow_sha256_by_profile": {
+          "WF_WAN22_I2V_14B_MACRO_LOCKED": null,
+          "WF_PROCEDURAL_DIEGETIC_COMP": null
+        },
+        "preflight_report_sha256": null,
+        "comfy_version": null,
+        "node_versions": null,
+        "model_identifiers_verified": false
+      }
+    },
+    {
+      "chain_id": "C03_CHORUS1_RETENTION",
+      "first_shot": "SE_016",
+      "last_shot": "SE_022",
+      "workflow_profiles": [
+        "WF_PROCEDURAL_DIEGETIC_COMP",
+        "WF_WAN22_I2V_14B_SENSOR_LOCKED",
+        "WF_WAN22_I2V_14B_MACRO_LOCKED"
+      ],
+      "environment_refs": [
+        "SE_REF_ENV_RACK_AISLE_01",
+        "SE_REF_ENV_SENSOR_BAY_01",
+        "SE_REF_ENV_EXT_RAIN_01",
+        "SE_REF_ENV_MATERIAL_LAB_01",
+        "SE_REF_ENV_HANGAR_RIG_01"
+      ],
+      "identity_refs": [
+        "SE_REF_ENKI_ORGANIC_SENSOR_01",
+        "SE_REF_ENKI_ROBOT_FRONT_01",
+        "SE_REF_ENKI_HEAD_EARS_01"
+      ],
+      "generation_canvas": {
+        "width": 1280,
+        "height": 720
+      },
+      "immutable_within_chain": [
+        "diffusion model filenames and SHA-256 hashes",
+        "VAE and text-encoder hashes",
+        "sampler, scheduler, steps and CFG",
+        "generation dimensions and aspect ratio",
+        "color-management and upscale chain",
+        "identity conditioning weights"
+      ],
+      "keyframe_rule": "Every shot starts from an approved shot-specific keyframe. Reuse an accepted last frame only for a continuing angle/action.",
+      "change_rule": "Any immutable change creates a new chain version and invalidates unreviewed downstream shots.",
+      "runtime_fields_to_fill": {
+        "workflow_sha256_by_profile": {
+          "WF_PROCEDURAL_DIEGETIC_COMP": null,
+          "WF_WAN22_I2V_14B_SENSOR_LOCKED": null,
+          "WF_WAN22_I2V_14B_MACRO_LOCKED": null
+        },
+        "preflight_report_sha256": null,
+        "comfy_version": null,
+        "node_versions": null,
+        "model_identifiers_verified": false
+      }
+    },
+    {
+      "chain_id": "C04_COMPONENTS_B",
+      "first_shot": "SE_023",
+      "last_shot": "SE_031",
+      "workflow_profiles": [
+        "WF_WAN22_I2V_14B_MACRO_LOCKED",
+        "WF_WAN22_I2V_14B_ROBOT_LOCKED",
+        "WF_PROCEDURAL_DIEGETIC_COMP",
+        "WF_WAN22_I2V_14B_ENV_LOCKED",
+        "WF_WAN22_I2V_14B_SENSOR_LOCKED"
+      ],
+      "environment_refs": [
+        "SE_REF_ENV_HANGAR_RIG_01",
+        "SE_REF_ENV_THRESHOLD_01",
+        "SE_REF_ENV_RACK_AISLE_01",
+        "SE_REF_ENV_MATERIAL_LAB_01",
+        "SE_REF_ENV_EXT_RAIN_01"
+      ],
+      "identity_refs": [
+        "SE_REF_ENKI_ROBOT_FRONT_01",
+        "SE_REF_ENKI_HEAD_EARS_01",
+        "SE_REF_ENKI_ORGANIC_SENSOR_01"
+      ],
+      "generation_canvas": {
+        "width": 1280,
+        "height": 720
+      },
+      "immutable_within_chain": [
+        "diffusion model filenames and SHA-256 hashes",
+        "VAE and text-encoder hashes",
+        "sampler, scheduler, steps and CFG",
+        "generation dimensions and aspect ratio",
+        "color-management and upscale chain",
+        "identity conditioning weights"
+      ],
+      "keyframe_rule": "Every shot starts from an approved shot-specific keyframe. Reuse an accepted last frame only for a continuing angle/action.",
+      "change_rule": "Any immutable change creates a new chain version and invalidates unreviewed downstream shots.",
+      "runtime_fields_to_fill": {
+        "workflow_sha256_by_profile": {
+          "WF_WAN22_I2V_14B_MACRO_LOCKED": null,
+          "WF_WAN22_I2V_14B_ROBOT_LOCKED": null,
+          "WF_PROCEDURAL_DIEGETIC_COMP": null,
+          "WF_WAN22_I2V_14B_ENV_LOCKED": null,
+          "WF_WAN22_I2V_14B_SENSOR_LOCKED": null
+        },
+        "preflight_report_sha256": null,
+        "comfy_version": null,
+        "node_versions": null,
+        "model_identifiers_verified": false
+      }
+    },
+    {
+      "chain_id": "C05_CHORUS2_REFUSAL",
+      "first_shot": "SE_032",
+      "last_shot": "SE_037",
+      "workflow_profiles": [
+        "WF_WAN22_I2V_14B_SENSOR_LOCKED",
+        "WF_PROCEDURAL_DIEGETIC_COMP",
+        "WF_WAN22_I2V_14B_MACRO_LOCKED"
+      ],
+      "environment_refs": [
+        "SE_REF_ENV_SENSOR_BAY_01",
+        "SE_REF_ENV_EXT_RAIN_01",
+        "SE_REF_ENV_RACK_AISLE_01",
+        "SE_REF_ENV_MATERIAL_LAB_01",
+        "SE_REF_ENV_HANGAR_RIG_01"
+      ],
+      "identity_refs": [
+        "SE_REF_ENKI_ORGANIC_SENSOR_01",
+        "SE_REF_ENKI_ROBOT_FRONT_01",
+        "SE_REF_ENKI_HEAD_EARS_01"
+      ],
+      "generation_canvas": {
+        "width": 1280,
+        "height": 720
+      },
+      "immutable_within_chain": [
+        "diffusion model filenames and SHA-256 hashes",
+        "VAE and text-encoder hashes",
+        "sampler, scheduler, steps and CFG",
+        "generation dimensions and aspect ratio",
+        "color-management and upscale chain",
+        "identity conditioning weights"
+      ],
+      "keyframe_rule": "Every shot starts from an approved shot-specific keyframe. Reuse an accepted last frame only for a continuing angle/action.",
+      "change_rule": "Any immutable change creates a new chain version and invalidates unreviewed downstream shots.",
+      "runtime_fields_to_fill": {
+        "workflow_sha256_by_profile": {
+          "WF_WAN22_I2V_14B_SENSOR_LOCKED": null,
+          "WF_PROCEDURAL_DIEGETIC_COMP": null,
+          "WF_WAN22_I2V_14B_MACRO_LOCKED": null
+        },
+        "preflight_report_sha256": null,
+        "comfy_version": null,
+        "node_versions": null,
+        "model_identifiers_verified": false
+      }
+    },
+    {
+      "chain_id": "C06_STABLE_BRIDGE",
+      "first_shot": "SE_038",
+      "last_shot": "SE_042",
+      "workflow_profiles": [
+        "WF_WAN22_I2V_14B_MACRO_LOCKED",
+        "WF_WAN22_S2V_14B_UTTU_LOCKED",
+        "WF_WAN22_I2V_14B_SENSOR_LOCKED"
+      ],
+      "environment_refs": [
+        "SE_REF_ENV_RACK_AISLE_01",
+        "SE_REF_ENV_SENSOR_BAY_01"
+      ],
+      "identity_refs": [
+        "SE_REF_APPROVED_UTTU_MOUTH_01",
+        "SE_REF_ENKI_ORGANIC_SENSOR_01"
+      ],
+      "generation_canvas": {
+        "width": 1280,
+        "height": 720
+      },
+      "immutable_within_chain": [
+        "diffusion model filenames and SHA-256 hashes",
+        "VAE and text-encoder hashes",
+        "sampler, scheduler, steps and CFG",
+        "generation dimensions and aspect ratio",
+        "color-management and upscale chain",
+        "identity conditioning weights"
+      ],
+      "keyframe_rule": "Every shot starts from an approved shot-specific keyframe. Reuse an accepted last frame only for a continuing angle/action.",
+      "change_rule": "Any immutable change creates a new chain version and invalidates unreviewed downstream shots.",
+      "runtime_fields_to_fill": {
+        "workflow_sha256_by_profile": {
+          "WF_WAN22_I2V_14B_MACRO_LOCKED": null,
+          "WF_WAN22_S2V_14B_UTTU_LOCKED": "480c74a1c7ba7aabb9b323fc10a6c0ea0e72ba6a1563465c6ecfabba60139820",
+          "WF_WAN22_I2V_14B_SENSOR_LOCKED": null
+        },
+        "preflight_report_sha256": "25e68935039ea45383d29e251b94d01541cca190bca538c0bbe217b9fd2d4fc0",
+        "comfy_version": "CAPTURED_BY_OBJECT_INFO_HASH",
+        "node_versions": "CAPTURED_IN_OBJECT_INFO.json",
+        "model_identifiers_verified": true
+      }
+    },
+    {
+      "chain_id": "C07_ASSEMBLY_BREAKDOWN",
+      "first_shot": "SE_043",
+      "last_shot": "SE_059",
+      "workflow_profiles": [
+        "WF_WAN22_I2V_14B_MACRO_LOCKED",
+        "WF_PROCEDURAL_DIEGETIC_COMP",
+        "WF_WAN22_I2V_14B_ROBOT_LOCKED"
+      ],
+      "environment_refs": [
+        "SE_REF_ENV_RACK_AISLE_01",
+        "SE_REF_ENV_HANGAR_RIG_01",
+        "SE_REF_ENV_MATERIAL_LAB_01",
+        "SE_REF_ENV_SENSOR_BAY_01"
+      ],
+      "identity_refs": [
+        "SE_REF_ENKI_ROBOT_FRONT_01",
+        "SE_REF_ENKI_HEAD_EARS_01"
+      ],
+      "generation_canvas": {
+        "width": 1280,
+        "height": 720
+      },
+      "immutable_within_chain": [
+        "diffusion model filenames and SHA-256 hashes",
+        "VAE and text-encoder hashes",
+        "sampler, scheduler, steps and CFG",
+        "generation dimensions and aspect ratio",
+        "color-management and upscale chain",
+        "identity conditioning weights"
+      ],
+      "keyframe_rule": "Every shot starts from an approved shot-specific keyframe. Reuse an accepted last frame only for a continuing angle/action.",
+      "change_rule": "Any immutable change creates a new chain version and invalidates unreviewed downstream shots.",
+      "runtime_fields_to_fill": {
+        "workflow_sha256_by_profile": {
+          "WF_WAN22_I2V_14B_MACRO_LOCKED": null,
+          "WF_PROCEDURAL_DIEGETIC_COMP": null,
+          "WF_WAN22_I2V_14B_ROBOT_LOCKED": null
+        },
+        "preflight_report_sha256": null,
+        "comfy_version": null,
+        "node_versions": null,
+        "model_identifiers_verified": false
+      }
+    },
+    {
+      "chain_id": "C08_FINAL_PHYSICAL",
+      "first_shot": "SE_060",
+      "last_shot": "SE_068",
+      "workflow_profiles": [
+        "WF_WAN22_I2V_14B_ROBOT_LOCKED",
+        "WF_WAN22_I2V_14B_MACRO_LOCKED",
+        "WF_WAN22_FLF2V_14B_LOCKED",
+        "WF_PROCEDURAL_DIEGETIC_COMP"
+      ],
+      "environment_refs": [
+        "SE_REF_ENV_HANGAR_RIG_01",
+        "SE_REF_ENV_THRESHOLD_01",
+        "SE_REF_ENV_EXT_RAIN_01",
+        "SE_REF_ENV_MATERIAL_LAB_01",
+        "SE_REF_ENV_RACK_AISLE_01"
+      ],
+      "identity_refs": [
+        "SE_REF_ENKI_ROBOT_FRONT_01",
+        "SE_REF_APPROVED_ENKI_REVEAL_01",
+        "SE_REF_ENKI_ROBOT_BACK_01",
+        "SE_REF_ENKI_HEAD_EARS_01"
+      ],
+      "generation_canvas": {
+        "width": 1280,
+        "height": 720
+      },
+      "immutable_within_chain": [
+        "diffusion model filenames and SHA-256 hashes",
+        "VAE and text-encoder hashes",
+        "sampler, scheduler, steps and CFG",
+        "generation dimensions and aspect ratio",
+        "color-management and upscale chain",
+        "identity conditioning weights"
+      ],
+      "keyframe_rule": "Every shot starts from an approved shot-specific keyframe. Reuse an accepted last frame only for a continuing angle/action.",
+      "change_rule": "Any immutable change creates a new chain version and invalidates unreviewed downstream shots.",
+      "runtime_fields_to_fill": {
+        "workflow_sha256_by_profile": {
+          "WF_WAN22_I2V_14B_ROBOT_LOCKED": "3313924265fc99aaa3c54f11946ff8c718d92e5ba2420bb51a8da87fef8a388b",
+          "WF_WAN22_I2V_14B_MACRO_LOCKED": null,
+          "WF_WAN22_FLF2V_14B_LOCKED": "875da4cdaabcdc33f998be531520bbd979a6244eb0dfdd671d74e64e2e3236dd",
+          "WF_PROCEDURAL_DIEGETIC_COMP": null
+        },
+        "preflight_report_sha256": "25e68935039ea45383d29e251b94d01541cca190bca538c0bbe217b9fd2d4fc0",
+        "comfy_version": "CAPTURED_BY_OBJECT_INFO_HASH",
+        "node_versions": "CAPTURED_IN_OBJECT_INFO.json",
+        "model_identifiers_verified": true
+      }
+    },
+    {
+      "chain_id": "C09_BLACK",
+      "first_shot": "SE_069",
+      "last_shot": "SE_069",
+      "workflow_profiles": [
+        "WF_PROCEDURAL_DIEGETIC_COMP"
+      ],
+      "environment_refs": [
+        "SE_REF_ENV_EXT_RAIN_01"
+      ],
+      "identity_refs": [],
+      "generation_canvas": {
+        "width": 1280,
+        "height": 720
+      },
+      "immutable_within_chain": [
+        "diffusion model filenames and SHA-256 hashes",
+        "VAE and text-encoder hashes",
+        "sampler, scheduler, steps and CFG",
+        "generation dimensions and aspect ratio",
+        "color-management and upscale chain",
+        "identity conditioning weights"
+      ],
+      "keyframe_rule": "Every shot starts from an approved shot-specific keyframe. Reuse an accepted last frame only for a continuing angle/action.",
+      "change_rule": "Any immutable change creates a new chain version and invalidates unreviewed downstream shots.",
+      "runtime_fields_to_fill": {
+        "workflow_sha256_by_profile": {
+          "WF_PROCEDURAL_DIEGETIC_COMP": null
+        },
+        "preflight_report_sha256": null,
+        "comfy_version": null,
+        "node_versions": null,
+        "model_identifiers_verified": false
+      }
+    }
+  ]
+}

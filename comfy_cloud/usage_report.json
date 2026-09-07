@@ -4,7 +4,29 @@
   "breakdown": [
     {
       "group": "GPU Hours Product",
-      "usd": 45.12
+      "usd": 31.614713,
+      "share": 0.507
+    },
+    {
+      "group": "ltx-2-5-fast",
+      "usd": 26.2834,
+      "share": 0.422
+    },
+    {
+      "group": "ltx-2-5-pro",
+      "usd": 2.9172,
+      "share": 0.047
+    },
+    {
+      "group": "sync-3",
+      "usd": 0.882,
+      "share": 0.014
+    },
+    {
+      "group": "Tripo Credits",
+      "usd": 0.6,
+      "share": 0.01
     }
-  ]
+  ],
+  "note": "Invoice-backed Comfy Cloud usage report via get_usage_report"
 }

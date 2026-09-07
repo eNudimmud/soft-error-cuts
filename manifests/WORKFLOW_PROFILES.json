@@ -1,0 +1,139 @@
+{
+  "version": "2.0",
+  "global": {
+    "master_delivery": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 24,
+      "color": "Rec.709 Gamma 2.4",
+      "audio": "Original master only"
+    },
+    "generation_canvas": {
+      "width": 1280,
+      "height": 720,
+      "note": "Use the closest model-valid 720p size; never mix sizes inside one continuity chain."
+    },
+    "fixed_pipeline_order": [
+      "KEYFRAME_MULTIREF",
+      "KEYFRAME_QC",
+      "VIDEO_GENERATION",
+      "FIRST_LAST_FRAME_QC",
+      "POST_COMPOSITE_GLITCH",
+      "24FPS_CONFORM",
+      "COLOR_MATCH",
+      "FINAL_QC"
+    ],
+    "seed_warning": "Seed reuse ensures reproducibility only. Identity and raccords are locked by approved keyframes, explicit states, reference roles, model hashes and accepted first/last frames."
+  },
+  "profiles": [
+    {
+      "id": "WF_KEYFRAME_MULTIREF_LOCKED",
+      "stage": "still",
+      "required": true,
+      "rule": "Use maximum three conditioning sources: prior accepted state frame, identity reference, environment/composition reference. Produce one shot-specific 16:9 PNG; no video starts before approval."
+    },
+    {
+      "id": "WF_WAN22_I2V_14B_ROBOT_LOCKED",
+      "stage": "video",
+      "official_template": "Wan2.2 14B I2V",
+      "model_family": "Wan2.2-I2V-A14B",
+      "use": "Robot E*NKI medium/full shots",
+      "reference_policy": "Approved keyframe is the sole video input. Identity references were resolved upstream.",
+      "final_only": true
+    },
+    {
+      "id": "WF_WAN22_I2V_14B_SENSOR_LOCKED",
+      "stage": "video",
+      "official_template": "Wan2.2 14B I2V",
+      "model_family": "Wan2.2-I2V-A14B",
+      "use": "Organic sensor-model shots",
+      "reference_policy": "Approved organic keyframe; heterochromia checked before motion.",
+      "final_only": true
+    },
+    {
+      "id": "WF_WAN22_I2V_14B_MACRO_LOCKED",
+      "stage": "video",
+      "official_template": "Wan2.2 14B I2V",
+      "model_family": "Wan2.2-I2V-A14B",
+      "use": "Hands, matter, mechanics and low-motion inserts",
+      "settings": {
+        "motion_amplitude": "minimum viable",
+        "camera": "locked unless card says otherwise"
+      },
+      "final_only": true
+    },
+    {
+      "id": "WF_WAN22_I2V_14B_ENV_LOCKED",
+      "stage": "video",
+      "official_template": "Wan2.2 14B I2V",
+      "model_family": "Wan2.2-I2V-A14B",
+      "use": "Environment plates with physically local movement"
+    },
+    {
+      "id": "WF_WAN22_FLF2V_14B_LOCKED",
+      "stage": "video",
+      "official_template": "Wan2.2 14B FLF2V",
+      "model_family": "Wan2.2-I2V-A14B",
+      "use": "Hard state transitions SE_063 and SE_066",
+      "reference_policy": "Start and end images are hard anchors. Reject any topology interpolation error."
+    },
+    {
+      "id": "WF_WAN22_S2V_14B_UTTU_LOCKED",
+      "stage": "video",
+      "official_template": "Wan2.2 S2V",
+      "model_family": "Wan2.2-S2V-14B",
+      "use": "SE_039 only",
+      "settings": {
+        "native_fps": 16,
+        "native_chunk_frames": 77,
+        "sampler": "20-step quality path",
+        "lightning_lora": "FORBIDDEN FOR FINAL \u2014 proxy only",
+        "camera": "locked",
+        "glitch": "none"
+      }
+    },
+    {
+      "id": "WF_PROCEDURAL_DIEGETIC_COMP",
+      "stage": "composite",
+      "use": "CRT, exact typography, cursor, black frames and allowed glitches",
+      "rule": "Never diffuse final text. Generate a clean physical plate, then composite exact typography and source-local anomalies."
+    },
+    {
+      "id": "WF_POST_LOCKED_24FPS",
+      "stage": "post",
+      "use": "All generated video",
+      "rule": "Trim to shot frame count, conform to 24 fps, match reference grade, add restrained global grain only after all shots are accepted."
+    },
+    {
+      "id": "WF_WAN22_S2V_14B_16x9_LOCKED",
+      "stage": "video",
+      "official_template": "video_wan2_2_14B_s2v",
+      "model_family": "Wan2.2-S2V-14B",
+      "use": "Lipsync Uttu/Enki native 16:9",
+      "settings": {
+        "width": 1280,
+        "height": 720
+      },
+      "final_only": true
+    },
+    {
+      "id": "WF_WAN22_I2V_14B_FROM_LAST_LOCKED",
+      "stage": "video",
+      "official_template": "video_wan2_2_14B_i2v",
+      "model_family": "Wan2.2-I2V-A14B",
+      "use": "Narrative motion from previous last frame only",
+      "reference_policy": "start_image = accepted prev last; atlas still forbidden if prev_last exists",
+      "final_only": true
+    },
+    {
+      "id": "WF_WAN22_FLF2V_14B_CHAIN_LOCKED",
+      "stage": "video",
+      "official_template": "video_wan2_2_14B_flf2v",
+      "model_family": "Wan2.2-FLF2V",
+      "use": "Hard continuity bridges",
+      "reference_policy": "start=prev_last end=target state",
+      "final_only": true
+    }
+  ],
+  "g6_lock_file": "06_COMFYUI/G6_WORKFLOW_LOCK.json"
+}

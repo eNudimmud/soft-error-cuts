@@ -1,0 +1,9 @@
+{
+  "source": "comfy_cloud_api/jobs_slim.json",
+  "total_jobs": 183,
+  "parts": [
+    "comfy_cloud/jobs_slim_part1.json",
+    "comfy_cloud/jobs_slim_part2.json"
+  ],
+  "note": "Split for GitHub MCP payload limits; concatenate part1+part2 jobs arrays for full slim list. Full monolithic jobs_slim.json omitted due to size."
+}

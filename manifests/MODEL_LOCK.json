@@ -1,0 +1,90 @@
+{
+  "version": "2.0",
+  "status": "LOCKED_FOR_G4_PILOTS",
+  "rule": "Within one continuity chain, model files, hashes, VAE, text encoder, sampler, scheduler, step count, CFG, dimensions and post chain are immutable. Any change creates a new workflow version and forces a chain-level review.",
+  "managed_cloud_policy": "If raw model SHA-256 values are unavailable, preserve the exact provider model identifiers and lock the API workflow hash plus preflight inventory hash. Never silently substitute a model.",
+  "official_core_targets": {
+    "i2v_high_noise": {
+      "filename": "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+      "sha256": null,
+      "provider": "comfy-cloud",
+      "lock_mode": "filename_identifier",
+      "observed_in_exported_workflows": false,
+      "director_filename": "wan2.2_i2v_high_noise_14B_fp16.safetensors",
+      "observed_filename": "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+      "runtime_identifier": "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+      "runtime_verification": "FOUND_IN_OBJECT_INFO"
+    },
+    "i2v_low_noise": {
+      "filename": "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+      "sha256": null,
+      "provider": "comfy-cloud",
+      "lock_mode": "filename_identifier",
+      "observed_in_exported_workflows": false,
+      "director_filename": "wan2.2_i2v_low_noise_14B_fp16.safetensors",
+      "observed_filename": "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+      "runtime_identifier": "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+      "runtime_verification": "FOUND_IN_OBJECT_INFO"
+    },
+    "i2v_vae": {
+      "filename": "wan_2.1_vae.safetensors",
+      "sha256": null,
+      "provider": "comfy-cloud",
+      "lock_mode": "filename_identifier",
+      "observed_in_exported_workflows": true,
+      "observed_filename": "wan_2.1_vae.safetensors",
+      "runtime_identifier": "wan_2.1_vae.safetensors",
+      "runtime_verification": "FOUND_IN_OBJECT_INFO"
+    },
+    "text_encoder": {
+      "filename": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "sha256": null,
+      "provider": "comfy-cloud",
+      "lock_mode": "filename_identifier",
+      "observed_in_exported_workflows": true,
+      "observed_filename": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "runtime_identifier": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "runtime_verification": "FOUND_IN_OBJECT_INFO"
+    },
+    "s2v_diffusion_preferred": {
+      "filename": "wan2.2_s2v_14B_fp8_scaled.safetensors",
+      "fallback": "wan2.2_s2v_14B_fp8_scaled.safetensors",
+      "sha256": null,
+      "provider": "comfy-cloud",
+      "lock_mode": "filename_identifier",
+      "observed_in_exported_workflows": true,
+      "observed_filename": "wan2.2_s2v_14B_fp8_scaled.safetensors",
+      "director_filename": "wan2.2_s2v_14B_bf16.safetensors",
+      "runtime_identifier": "wan2.2_s2v_14B_fp8_scaled.safetensors",
+      "runtime_verification": "FOUND_IN_OBJECT_INFO"
+    },
+    "s2v_audio_encoder": {
+      "filename": "wav2vec2_large_english_fp16.safetensors",
+      "sha256": null,
+      "provider": "comfy-cloud",
+      "lock_mode": "filename_identifier",
+      "observed_in_exported_workflows": true,
+      "observed_filename": "wav2vec2_large_english_fp16.safetensors",
+      "runtime_identifier": "wav2vec2_large_english_fp16.safetensors",
+      "runtime_verification": "FOUND_IN_OBJECT_INFO"
+    }
+  },
+  "final_quality_rule": "Do not use Wan Lightning 4-step LoRA for final SE_039 or hero shots. It may be used only for labeled proxies.",
+  "instance_fields_to_fill": [
+    "comfy_version",
+    "workflow_hashes",
+    "node_versions",
+    "model_hashes",
+    "gpu",
+    "generation_dimensions"
+  ],
+  "workflow_hashes": {
+    "WF_SE_UTTU_S2V_api.json": "ad7e16186826825525a15821d72722205a845773568b501d57b76b5808d81189",
+    "WF_SE_WAN_I2V_api.json": "3313924265fc99aaa3c54f11946ff8c718d92e5ba2420bb51a8da87fef8a388b",
+    "WF_SE_WAN_FLF2V_api.json": "875da4cdaabcdc33f998be531520bbd979a6244eb0dfdd671d74e64e2e3236dd"
+  },
+  "comfy_version": "cloud.comfy.org",
+  "note": "Raw SHA-256 of weight files unavailable on managed Comfy Cloud; locked by exact filenames present in exported API workflows + workflow graph hashes.",
+  "runtime_preflight_sha256": "25e68935039ea45383d29e251b94d01541cca190bca538c0bbe217b9fd2d4fc0",
+  "runtime_object_info_sha256": "905954ef7fc8a8c46330311b846c212cab718dd6aed0e87aecfa0e06f4a0699f"
+}

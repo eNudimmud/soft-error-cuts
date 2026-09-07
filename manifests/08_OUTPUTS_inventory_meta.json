@@ -1,5 +1,12 @@
 {
   "root": "/workspace/uttu-handoff-soft-error/SOFT_ERROR_UTTU_GROK_HANDOFF_v2.1/08_OUTPUTS",
   "file_count": 1072,
-  "total_bytes": 7633942362
+  "total_bytes": 7633942362,
+  "parts": [
+    "manifests/08_OUTPUTS_inventory_part1_a.json",
+    "manifests/08_OUTPUTS_inventory_part1_b.json",
+    "manifests/08_OUTPUTS_inventory_part2_a.json",
+    "manifests/08_OUTPUTS_inventory_part2_b.json"
+  ],
+  "note": "Inventory split for MCP payload limits; concat files arrays in order. Original monolithic 08_OUTPUTS_inventory.json omitted due to size."
 }

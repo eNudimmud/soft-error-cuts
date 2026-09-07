@@ -1,1 +1,128 @@
-PLACEHOLDER
+{
+  "version": "G6.1",
+  "canvas": {
+    "width": 1280,
+    "height": 720,
+    "fps_gen": 16,
+    "fps_delivery": 24
+  },
+  "HARD_RULES": [
+    "Never use I2V_SINGLE_ANCHOR with recycled atlas still for consecutive narrative beats",
+    "Chain rule: shot N start_image MUST be shot N-1 accepted last frame (or FLF2V start/end pair)",
+    "All video outputs native 1280x720 \u2014 pad/crop FAIL QC",
+    "Lipsync sung lines: S2V (or dedicated lipsync module), never mute I2V",
+    "One intention \u2192 one workflow profile; runner must refuse wrong class"
+  ],
+  "modules": {
+    "LIPSYNC_S2V": {
+      "profile": "WF_WAN22_S2V_14B_16x9_LOCKED",
+      "comfy_template": "video_wan2_2_14B_s2v",
+      "workflow_file": "06_COMFYUI/workflows/WF_SE_UTTU_S2V_16x9_api.json",
+      "inputs": [
+        "ref_image_16x9",
+        "audio_handle"
+      ],
+      "params": {
+        "width": 1280,
+        "height": 720
+      },
+      "use_for": [
+        "Uttu sung",
+        "Enki face-on sung"
+      ]
+    },
+    "LIPSYNC_ALT_IA2V": {
+      "profile": "WF_LTX23_IA2V_LIPSYNC_CANDIDATE",
+      "comfy_template": "video_ltx2_3_ia2v",
+      "status": "CANDIDATE_NOT_DEFAULT",
+      "note": "Alt lipsync if Wan S2V fails identity; do not mass-use (LTX burn history)"
+    },
+    "LIPSYNC_POST_SYNC": {
+      "profile": "WF_SYNC3_VIDEO_LIPSYNC_POST",
+      "comfy_template": "api_sync_so_lip_sync_video",
+      "status": "POST_PASS_ONLY",
+      "note": "Re-lipsync existing plate to audio without full regen"
+    },
+    "CHAIN_FLF2V": {
+      "profile": "WF_WAN22_FLF2V_14B_CHAIN_LOCKED",
+      "comfy_template": "video_wan2_2_14B_flf2v",
+      "workflow_file": "06_COMFYUI/workflows/WF_SE_WAN_FLF2V_api.json",
+      "inputs": [
+        "start_image=prev_last",
+        "end_image=next_key_or_state"
+      ],
+      "params": {
+        "width": 1280,
+        "height": 720
+      },
+      "use_for": [
+        "state transitions",
+        "same-still run bridges",
+        "hard continuity"
+      ]
+    },
+    "CHAIN_I2V_FROM_LAST": {
+      "profile": "WF_WAN22_I2V_14B_FROM_LAST_LOCKED",
+      "comfy_template": "video_wan2_2_14B_i2v",
+      "workflow_file": "06_COMFYUI/workflows/WF_SE_WAN_I2V_api.json",
+      "inputs": [
+        "start_image=prev_last ONLY"
+      ],
+      "forbidden": [
+        "atlas still reuse when prev_last exists"
+      ],
+      "params": {
+        "width": 1280,
+        "height": 720
+      }
+    },
+    "MOTION_TRANSFER": {
+      "profile": "WF_WAN_ANIMATE2_MOTION",
+      "comfy_template": "video_wan_animate2",
+      "status": "FOR_DYNAMISM_PILOTS",
+      "use_for": [
+        "drive performance energy from reference motion onto locked identity still"
+      ]
+    },
+    "VACE_CONTROL": {
+      "profile": "WF_WAN21_VACE_V2V",
+      "comfy_template": "video_wan_vace_14B_v2v",
+      "status": "FOR_RACCORD_FIX",
+      "use_for": [
+        "steer existing clip toward target end state"
+      ]
+    },
+    "INTERPOLATE": {
+      "profile": "WF_FRAME_INTERP",
+      "comfy_template": "utility_video_frame_interpolation",
+      "use_for": [
+        "smooth 16\u219224 and micro-raccords after accept"
+      ]
+    },
+    "PROCEDURAL": {
+      "profile": "WF_FFMPEG_DIEGETIC",
+      "workflow_file": "06_COMFYUI/scripts/build_procedural_diegetic_plates.py",
+      "credits": 0
+    }
+  },
+  "routing": {
+    "RETAKE_S2V_LIPSYNC_16x9": "LIPSYNC_S2V",
+    "RETAKE_S2V_LIPSYNC_ENKI": "LIPSYNC_S2V",
+    "RETAKE_CHAIN_I2V": "CHAIN_I2V_FROM_LAST",
+    "KEEP_OR_RECHAIN_FLF2V": "CHAIN_FLF2V",
+    "PROCEDURAL_OK": "PROCEDURAL",
+    "same_still_multi_shot_run": "CHAIN_FLF2V_or_I2V_FROM_LAST"
+  },
+  "execution_order": [
+    "P0 SE_039 LIPSYNC_S2V 16x9 (running)",
+    "Workspace: harvest last frames (done)",
+    "Pilot chain SE_005\u2192SE_006 via CHAIN_I2V_FROM_LAST using SE_005_last as start",
+    "Pilot FLF2V on one same-still pair (SE_012\u2192013) with start=012_last end=013 target key",
+    "Then Enki S2V only for face-on sung windows with sliced audio"
+  ],
+  "TEMPLATE_TRAPS": [
+    "Official video_wan2_2_14B_flf2v defaults width/height 640 \u2014 ALWAYS override to 1280x720 (local WF_SE_WAN_FLF2V_api.json locked)",
+    "Official video_wan2_2_14B_i2v subgraph defaults 640 \u2014 ALWAYS override width/height 1280x720",
+    "SE_039 v002 failed this trap on S2V (640 square)"
+  ]
+}
